@@ -1,224 +1,153 @@
-\# GSM Gas Leakage Detector 🚨🔥
+GSM Gas Leakage Detector 🚨🔥
 
+A smart GSM-based Gas Leakage Detection System using Arduino that detects gas leakage, alerts users via SMS and call, displays status on an I2C LCD, activates a buzzer & LEDs, and automatically controls a gas regulator using a servo motor.
 
+📌 Features
 
-A smart \*\*GSM-based Gas Leakage Detection System\*\* using Arduino that detects gas leakage, alerts users via \*\*SMS and call\*\*, displays status on an \*\*I2C LCD\*\*, activates a \*\*buzzer \& LEDs\*\*, and automatically controls a \*\*gas regulator using a servo motor\*\*.
+✅ Detects gas leakage using MQ gas sensor
 
+📟 Displays gas level (%) on 16x2 I2C LCD
 
+🚨 Activates buzzer and red LED during leakage
 
----
+📞 Automatically makes a call on gas detection
 
+📩 Sends SMS alert with gas level
 
+🔄 Controls gas regulator using servo motor
 
-\## 📌 Features
+📬 Can receive SMS commands:
 
+ON → Open gas regulator
 
+OFF → Close gas regulator
 
-\- ✅ Detects gas leakage using MQ gas sensor  
+🧰 Components Used
+Component	Quantity
+Arduino Uno	1
+MQ Gas Sensor	1
+GSM Module (SIM800/900)	1
+Servo Motor	1
+16x2 I2C LCD	1
+Buzzer	1
+Red LED	1
+Green LED	1
+Resistors	As required
+Connecting Wires	As required
+External Power Supply (for GSM)	1
+🔌 Pin Connections
+Gas Sensor
 
-\- 📟 Displays gas level (%) on 16x2 I2C LCD  
+AO → A0
 
-\- 🚨 Activates buzzer and red LED during leakage  
+GSM Module
 
-\- 📞 Automatically makes a call on gas detection  
+TX → Arduino Pin 2
 
-\- 📩 Sends SMS alert with gas level  
+RX → Arduino Pin 3
 
-\- 🔄 Controls gas regulator using servo motor  
+GND → GND
 
-\- 📬 Can receive SMS commands:
+VCC → External 12V / 5V (as per module)
 
-&nbsp; - \*\*ON\*\* → Open gas regulator  
+⚠️ Do NOT power GSM module directly from Arduino 5V
 
-&nbsp; - \*\*OFF\*\* → Close gas regulator  
+LCD (I2C)
 
+SDA → A4
 
+SCL → A5
 
----
+Servo Motor
 
+Signal → Pin 9
 
+VCC → External 5V
 
-\## 🧰 Components Used
+GND → GND
 
+LEDs & Buzzer
 
+Red LED → Pin 7
 
-| Component | Quantity |
+Green LED → Pin 6
 
-|---------|----------|
+Buzzer → Pin 8
 
-| Arduino Uno | 1 |
+📚 Libraries Required
 
-| MQ Gas Sensor | 1 |
+Install the following libraries from Arduino Library Manager:
 
-| GSM Module (SIM800/900) | 1 |
+LiquidCrystal_I2C
 
-| Servo Motor | 1 |
+Servo
 
-| 16x2 I2C LCD | 1 |
+SoftwareSerial
 
-| Buzzer | 1 |
+Wire
 
-| Red LED | 1 |
+⚙️ Working Principle
 
-| Green LED | 1 |
+Gas sensor continuously monitors gas level
 
-| Resistors | As required |
+Gas value is converted into percentage
 
-| Connecting Wires | As required |
+If gas level exceeds 30% threshold:
 
-| External Power Supply (for GSM) | 1 |
+Buzzer turns ON
 
+Red LED glows
 
+Servo closes gas regulator
 
----
+SMS alert is sent
 
+Call is made to user
 
+LCD displays GAS ALERT
 
-\## 🔌 Pin Connections
+User can remotely control regulator via SMS (ON / OFF)
 
+When gas level is safe:
 
+Green LED glows
 
-\### Gas Sensor
+System resets automatically
 
-\- \*\*AO → A0\*\*
+📱 SMS Commands
+Command	Action
+ON	Opens gas regulator
+OFF	Closes gas regulator
+🛠️ Configuration
 
-
-
-\### GSM Module
-
-\- \*\*TX → Arduino Pin 2\*\*
-
-\- \*\*RX → Arduino Pin 3\*\*
-
-\- \*\*GND → GND\*\*
-
-\- \*\*VCC → External 12V / 5V (as per module)\*\*
-
-
-
-⚠️ \*Do NOT power GSM module directly from Arduino 5V\*
-
-
-
-\### LCD (I2C)
-
-\- \*\*SDA → A4\*\*
-
-\- \*\*SCL → A5\*\*
-
-
-
-\### Servo Motor
-
-\- \*\*Signal → Pin 9\*\*
-
-\- \*\*VCC → External 5V\*\*
-
-\- \*\*GND → GND\*\*
-
-
-
-\### LEDs \& Buzzer
-
-\- \*\*Red LED → Pin 7\*\*
-
-\- \*\*Green LED → Pin 6\*\*
-
-\- \*\*Buzzer → Pin 8\*\*
-
-
-
----
-
-
-
-\## 📚 Libraries Required
-
-
-
-Install these libraries from \*\*Arduino Library Manager\*\*:
-
-
-
-\- `LiquidCrystal\_I2C`
-
-\- `Servo`
-
-\- `SoftwareSerial`
-
-\- `Wire`
-
-
-
----
-
-
-
-\## ⚙️ Working Principle
-
-
-
-1\. Gas sensor continuously monitors gas level
-
-2\. Gas value is converted into percentage
-
-3\. If gas level exceeds \*\*30% threshold\*\*:
-
-&nbsp;  - Buzzer turns ON
-
-&nbsp;  - Red LED glows
-
-&nbsp;  - Servo closes gas regulator
-
-&nbsp;  - SMS alert is sent
-
-&nbsp;  - Call is made to user
-
-4\. LCD displays \*\*GAS ALERT\*\*
-
-5\. User can remotely control regulator via SMS (\*\*ON / OFF\*\*)
-
-6\. When gas level is safe:
-
-&nbsp;  - Green LED glows
-
-&nbsp;  - System resets automatically
-
-
-
----
-
-
-
-\## 📱 SMS Commands
-
-
-
-| Command | Action |
-
-|-------|--------|
-
-| `ON` | Opens gas regulator |
-
-| `OFF` | Closes gas regulator |
-
-
-
----
-
-
-
-\## 🛠️ Configuration
-
-
-
-Edit the phone number in code:
-
-```cpp
+Edit the phone number in the Arduino code:
 
 AT+CMGS="+91XXXXXXXXXX"
-
 ATD+91XXXXXXXXXX;
 
 
+Adjust gas threshold if required:
 
+int thresholdPercent = 30;
+
+🧪 Applications
+
+Home kitchens
+
+Restaurants
+
+Gas laboratories
+
+Industries
+
+LPG safety systems
+
+👨‍💻 Author
+
+Sab
+B.Tech – Robotics & Artificial Intelligence
+Embedded Systems | Arduino | GSM | IoT
+
+📜 License
+
+This project is open-source and free to use for educational purposes.
